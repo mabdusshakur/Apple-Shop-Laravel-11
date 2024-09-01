@@ -13,7 +13,7 @@ class ResponseHelper
      * @param mixed $statusCode - status code, default is 200
      * @return mixed|\Illuminate\Http\JsonResponse
      */
-    public function sendSuccess($message, $result, $statusCode = 200): JsonResponse
+    public static function sendSuccess($message, $result, $statusCode = 200): JsonResponse
     {
         $response = [
             'success' => true,
@@ -32,7 +32,7 @@ class ResponseHelper
      * @param mixed $errors - error data array
      * @return mixed|\Illuminate\Http\JsonResponse
      */
-    public function sendError($message, $errors = [], $statusCode = 400): JsonResponse
+    public static function sendError($message, $errors = [], $statusCode = 400): JsonResponse
     {
         $response = [
             'success' => false,
