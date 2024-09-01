@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,6 +12,14 @@ return new class extends Migration
     {
         Schema::create('sslcommerz_credentials', function (Blueprint $table) {
             $table->id();
+            $table->string('store_id')->nullable();
+            $table->string('store_passwd')->nullable();
+            $table->string('currency')->nullable();
+            $table->string('success_url')->nullable();
+            $table->string('fail_url')->nullable();
+            $table->string('cancel_url')->nullable();
+            $table->string('ipn_url')->nullable();
+            $table->string('init_url')->nullable();
             $table->timestamps();
         });
     }
