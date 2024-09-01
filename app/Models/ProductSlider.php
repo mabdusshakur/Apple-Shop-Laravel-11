@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class ProductSlider extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'title',
+        'short_description',
+        'price',
+        'image',
+        'active',
+        'product_id',
+    ];
 }
