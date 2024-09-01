@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Models\Invoice;
-use App\Http\Requests\StoreInvoiceRequest;
-use App\Http\Requests\UpdateInvoiceRequest;
+use App\Models\CustomerProfile;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCustomerProfileRequest;
+use App\Http\Requests\UpdateCustomerProfileRequest;
 
-class InvoiceController extends Controller
+class CustomerProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +28,7 @@ class InvoiceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreInvoiceRequest $request)
+    public function store(StoreCustomerProfileRequest $request)
     {
         //
     }
@@ -35,7 +36,7 @@ class InvoiceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Invoice $invoice)
+    public function show(CustomerProfile $customerProfile)
     {
         //
     }
@@ -43,7 +44,7 @@ class InvoiceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Invoice $invoice)
+    public function edit(CustomerProfile $customerProfile)
     {
         //
     }
@@ -51,7 +52,7 @@ class InvoiceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateInvoiceRequest $request, Invoice $invoice)
+    public function update(UpdateCustomerProfileRequest $request, CustomerProfile $customerProfile)
     {
         //
     }
@@ -59,7 +60,7 @@ class InvoiceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Invoice $invoice)
+    public function destroy(CustomerProfile $customerProfile)
     {
         //
     }

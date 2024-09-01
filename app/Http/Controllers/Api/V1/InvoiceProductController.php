@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Models\CustomerProfile;
-use App\Http\Requests\StoreCustomerProfileRequest;
-use App\Http\Requests\UpdateCustomerProfileRequest;
+use App\Models\InvoiceProduct;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreInvoiceProductRequest;
+use App\Http\Requests\UpdateInvoiceProductRequest;
 
-class CustomerProfileController extends Controller
+class InvoiceProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +28,7 @@ class CustomerProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCustomerProfileRequest $request)
+    public function store(StoreInvoiceProductRequest $request)
     {
         //
     }
@@ -35,7 +36,7 @@ class CustomerProfileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CustomerProfile $customerProfile)
+    public function show(InvoiceProduct $invoiceProduct)
     {
         //
     }
@@ -43,7 +44,7 @@ class CustomerProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CustomerProfile $customerProfile)
+    public function edit(InvoiceProduct $invoiceProduct)
     {
         //
     }
@@ -51,7 +52,7 @@ class CustomerProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCustomerProfileRequest $request, CustomerProfile $customerProfile)
+    public function update(UpdateInvoiceProductRequest $request, InvoiceProduct $invoiceProduct)
     {
         //
     }
@@ -59,7 +60,7 @@ class CustomerProfileController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CustomerProfile $customerProfile)
+    public function destroy(InvoiceProduct $invoiceProduct)
     {
         //
     }

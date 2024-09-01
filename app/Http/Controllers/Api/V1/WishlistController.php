@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Models\Brand;
-use App\Http\Requests\StoreBrandRequest;
-use App\Http\Requests\UpdateBrandRequest;
+use App\Models\Wishlist;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreWishlistRequest;
+use App\Http\Requests\UpdateWishlistRequest;
 
-class BrandController extends Controller
+class WishlistController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +28,7 @@ class BrandController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBrandRequest $request)
+    public function store(StoreWishlistRequest $request)
     {
         //
     }
@@ -35,7 +36,7 @@ class BrandController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Brand $brand)
+    public function show(Wishlist $wishlist)
     {
         //
     }
@@ -43,7 +44,7 @@ class BrandController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Brand $brand)
+    public function edit(Wishlist $wishlist)
     {
         //
     }
@@ -51,7 +52,7 @@ class BrandController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBrandRequest $request, Brand $brand)
+    public function update(UpdateWishlistRequest $request, Wishlist $wishlist)
     {
         //
     }
@@ -59,7 +60,7 @@ class BrandController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Brand $brand)
+    public function destroy(Wishlist $wishlist)
     {
         //
     }

@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Models\Wishlist;
-use App\Http\Requests\StoreWishlistRequest;
-use App\Http\Requests\UpdateWishlistRequest;
+use App\Http\Controllers\Controller;
+use App\Models\Invoice;
+use App\Http\Requests\StoreInvoiceRequest;
+use App\Http\Requests\UpdateInvoiceRequest;
 
-class WishlistController extends Controller
+class InvoiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +28,7 @@ class WishlistController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreWishlistRequest $request)
+    public function store(StoreInvoiceRequest $request)
     {
         //
     }
@@ -35,7 +36,7 @@ class WishlistController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Wishlist $wishlist)
+    public function show(Invoice $invoice)
     {
         //
     }
@@ -43,7 +44,7 @@ class WishlistController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Wishlist $wishlist)
+    public function edit(Invoice $invoice)
     {
         //
     }
@@ -51,7 +52,7 @@ class WishlistController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateWishlistRequest $request, Wishlist $wishlist)
+    public function update(UpdateInvoiceRequest $request, Invoice $invoice)
     {
         //
     }
@@ -59,7 +60,7 @@ class WishlistController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Wishlist $wishlist)
+    public function destroy(Invoice $invoice)
     {
         //
     }

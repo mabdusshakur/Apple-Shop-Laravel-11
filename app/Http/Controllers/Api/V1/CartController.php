@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Models\ProductSlider;
-use App\Http\Requests\StoreProductSliderRequest;
-use App\Http\Requests\UpdateProductSliderRequest;
+use App\Models\Cart;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCartRequest;
+use App\Http\Requests\UpdateCartRequest;
 
-class ProductSliderController extends Controller
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +28,7 @@ class ProductSliderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProductSliderRequest $request)
+    public function store(StoreCartRequest $request)
     {
         //
     }
@@ -35,7 +36,7 @@ class ProductSliderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ProductSlider $productSlider)
+    public function show(Cart $cart)
     {
         //
     }
@@ -43,7 +44,7 @@ class ProductSliderController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ProductSlider $productSlider)
+    public function edit(Cart $cart)
     {
         //
     }
@@ -51,7 +52,7 @@ class ProductSliderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductSliderRequest $request, ProductSlider $productSlider)
+    public function update(UpdateCartRequest $request, Cart $cart)
     {
         //
     }
@@ -59,7 +60,7 @@ class ProductSliderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProductSlider $productSlider)
+    public function destroy(Cart $cart)
     {
         //
     }
