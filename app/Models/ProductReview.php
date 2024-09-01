@@ -21,7 +21,7 @@ class ProductReview extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public function customer(): BelongsTo
+    public function customerProfile(): BelongsTo
     {
         return $this->belongsTo(CustomerProfile::class, 'customer_id');
     }
