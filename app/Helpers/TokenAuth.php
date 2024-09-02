@@ -21,4 +21,13 @@ class TokenAuth
     {
         return $request->headers->get('email');
     }
+
+    /**
+     * Summary of isAdmin
+     * return is_admin from request header coming from TokenVerificationMiddleware
+     */
+    public static function isAdmin($request): bool
+    {
+        return $request->headers->get('is_admin');
+    }
 }
