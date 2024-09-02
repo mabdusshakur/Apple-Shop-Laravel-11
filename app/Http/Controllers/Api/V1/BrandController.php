@@ -100,7 +100,9 @@ class BrandController extends Controller
                 $image_name = time() . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('uploads/images'), $image_name);
                 $data['image'] = 'uploads/images/' . $image_name;
-                unlink(public_path($brand->image));
+                if ($brand->image && file_exists(public_path($brand->image))) {
+                    unlink(public_path($brand->image));
+                }
             }
 
             $brand->update($data);
@@ -123,7 +125,9 @@ class BrandController extends Controller
                 return ResponseHelper::sendError('You are not authorized to perform this action', null, 403);
             }
 
-            unlink(public_path($brand->image));
+            if ($brand->image && file_exists(public_path($brand->image))) {
+                unlink(public_path($brand->image));
+            }
             $brand->delete();
 
             return ResponseHelper::sendSuccess('Brand deleted successfully', null, 200);
