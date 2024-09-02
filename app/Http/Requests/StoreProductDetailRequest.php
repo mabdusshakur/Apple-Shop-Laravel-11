@@ -24,10 +24,10 @@ class StoreProductDetailRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'img1' => 'required|image|max:200',
-            'img2' => 'required|image|max:200',
-            'img3' => 'required|image|max:200',
-            'img4' => 'required|image|max:200',
+            'img1' => 'required|image',
+            'img2' => 'required|image',
+            'img3' => 'required|image',
+            'img4' => 'required|image',
             'description' => 'required|string',
             'color' => 'required|string|max:200',
             'size' => 'required|string|max:200',
