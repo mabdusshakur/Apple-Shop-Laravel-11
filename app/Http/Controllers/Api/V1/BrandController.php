@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Helper\ResponseHelper;
+use App\Helpers\TokenAuth;
 use App\Models\Brand;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBrandRequest;
@@ -14,7 +16,12 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $brands = Brand::all();
+            return ResponseHelper::sendSuccess('Brands retrieved successfully', $brands, 200);
+        } catch (\Throwable $th) {
+            return ResponseHelper::sendError('Failed to retrieve brands', $th->getMessage(), 500);
+        }
     }
 
     /**
@@ -30,7 +37,32 @@ class BrandController extends Controller
      */
     public function store(StoreBrandRequest $request)
     {
-        //
+        try {
+            $is_admin = TokenAuth::isAdmin(request());
+
+            if (!$is_admin) {
+                return ResponseHelper::sendError('You are not authorized to perform this action', null, 403);
+            }
+
+            $data = $request->all();
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $image_name = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('uploads/images'), $image_name);
+                $data['image'] = 'uploads/images/' . $image_name;
+            }
+
+            $brand = Brand::create($data);
+
+            if (!$brand) {
+                return ResponseHelper::sendError('Failed to create brand', null, 500);
+            }
+
+            return ResponseHelper::sendSuccess('Brand created successfully', $brand, 201);
+        } catch (\Throwable $th) {
+            return ResponseHelper::sendError('Failed to create brand', $th->getMessage(), 500);
+        }
     }
 
     /**
@@ -54,7 +86,28 @@ class BrandController extends Controller
      */
     public function update(UpdateBrandRequest $request, Brand $brand)
     {
-        //
+        try {
+            $is_admin = TokenAuth::isAdmin(request());
+
+            if (!$is_admin) {
+                return ResponseHelper::sendError('You are not authorized to perform this action', null, 403);
+            }
+
+            $data = $request->all();
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $image_name = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('uploads/images'), $image_name);
+                $data['image'] = 'uploads/images/' . $image_name;
+            }
+
+            $brand->update($data);
+
+            return ResponseHelper::sendSuccess('Brand updated successfully', $brand, 200);
+        } catch (\Throwable $th) {
+            return ResponseHelper::sendError('Failed to update brand', $th->getMessage(), 500);
+        }
     }
 
     /**
@@ -62,6 +115,19 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+        try {
+            $is_admin = TokenAuth::isAdmin(request());
+
+            if (!$is_admin) {
+                return ResponseHelper::sendError('You are not authorized to perform this action', null, 403);
+            }
+
+            unlink(public_path($brand->image));
+            $brand->delete();
+
+            return ResponseHelper::sendSuccess('Brand deleted successfully', null, 200);
+        } catch (\Throwable $th) {
+            return ResponseHelper::sendError('Failed to delete brand', $th->getMessage(), 500);
+        }
     }
 }
