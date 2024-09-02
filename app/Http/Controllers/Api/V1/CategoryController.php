@@ -100,7 +100,7 @@ class CategoryController extends Controller
                 $image_name = time() . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('uploads/images'), $image_name);
                 $data['image'] = 'uploads/images/' . $image_name;
-                if (file_exists(public_path($category->image))) {
+                if ($category->image && file_exists(public_path($category->image))) {
                     unlink(public_path($category->image));
                 }
             }
@@ -125,7 +125,7 @@ class CategoryController extends Controller
                 return ResponseHelper::sendError('You are not authorized to perform this action', null, 403);
             }
 
-            if (file_exists(public_path($category->image))) {
+            if ($category->image && file_exists(public_path($category->image))) {
                 unlink(public_path($category->image));
             }
             $category->delete();
