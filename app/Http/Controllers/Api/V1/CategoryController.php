@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Helper\ResponseHelper;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
@@ -14,7 +15,12 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $categories = Category::all();
+            return ResponseHelper::sendSuccess('Categories retrieved successfully', $categories, 200);
+        } catch (\Throwable $th) {
+            return ResponseHelper::sendError('Failed to retrieve categories', $th->getMessage(), 500);
+        }
     }
 
     /**
@@ -30,7 +36,26 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        try {
+            $data = $request->all();
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $image_name = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('uploads/images'), $image_name);
+                $data['image'] = 'uploads/images/' . $image_name;
+            }
+
+            $category = Category::create($data);
+
+            if (!$category) {
+                return ResponseHelper::sendError('Failed to create category', null, 500);
+            }
+
+            return ResponseHelper::sendSuccess('Category created successfully', $category, 201);
+        } catch (\Throwable $th) {
+            return ResponseHelper::sendError('Failed to create category', $th->getMessage(), 500);
+        }
     }
 
     /**
@@ -54,7 +79,22 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        try {
+            $data = $request->all();
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $image_name = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('uploads/images'), $image_name);
+                $data['image'] = 'uploads/images/' . $image_name;
+            }
+
+            $category->update($data);
+
+            return ResponseHelper::sendSuccess('Category updated successfully', $category, 200);
+        } catch (\Throwable $th) {
+            return ResponseHelper::sendError('Failed to update category', $th->getMessage(), 500);
+        }
     }
 
     /**
@@ -62,6 +102,12 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        try {
+            unlink(public_path($category->image));
+            $category->delete();
+            return ResponseHelper::sendSuccess('Category deleted successfully', null, 200);
+        } catch (\Throwable $th) {
+            return ResponseHelper::sendError('Failed to delete category', $th->getMessage(), 500);
+        }
     }
 }
