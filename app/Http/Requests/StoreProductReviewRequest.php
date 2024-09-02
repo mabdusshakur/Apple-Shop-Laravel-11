@@ -24,7 +24,9 @@ class StoreProductReviewRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'description' => 'required|string|max:1000',
+            'rating' => 'required|string|max:10',
+            'product_id' => 'required|exists:products,id'
         ];
     }
 
