@@ -42,7 +42,7 @@ class JWTToken
      */
     private static function isAdmin($user)
     {
-        return User::where('email', $user)->first()->is_admin;
+        return User::where('id', $user)->first()->is_admin;
     }
 
     /**
