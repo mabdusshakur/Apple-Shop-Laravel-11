@@ -15,12 +15,12 @@ return new class extends Migration {
             $table->string('title', 200);
             $table->string('short_des', 500);
             $table->decimal('price', 8, 2);
-            $table->boolean('is_discount');
-            $table->decimal('discount_price', 8, 2);
+            $table->boolean('is_discount')->default(false);
+            $table->decimal('discount_price', 8, 2)->nullable();
             $table->string('image', 200);
-            $table->boolean('in_stock');
-            $table->integer('stock');
-            $table->float('star');
+            $table->boolean('in_stock')->default(true);
+            $table->integer('stock')->default(0);
+            $table->float('star')->default(0);
             $table->enum('remark', ['popular', 'new', 'top', 'special', 'trending', 'regular'])->default('regular');
             $table->foreignId('category_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->foreignId('brand_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
