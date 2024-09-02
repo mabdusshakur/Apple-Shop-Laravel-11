@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Helper\ResponseHelper;
+use App\Helpers\TokenAuth;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
@@ -37,6 +38,12 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         try {
+            $is_admin = TokenAuth::isAdmin(request());
+
+            if (!$is_admin) {
+                return ResponseHelper::sendError('You are not authorized to perform this action', null, 403);
+            }
+
             $data = $request->all();
 
             if ($request->hasFile('image')) {
@@ -80,6 +87,12 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         try {
+            $is_admin = TokenAuth::isAdmin(request());
+
+            if (!$is_admin) {
+                return ResponseHelper::sendError('You are not authorized to perform this action', null, 403);
+            }
+
             $data = $request->all();
 
             if ($request->hasFile('image')) {
@@ -103,6 +116,12 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         try {
+            $is_admin = TokenAuth::isAdmin(request());
+
+            if (!$is_admin) {
+                return ResponseHelper::sendError('You are not authorized to perform this action', null, 403);
+            }
+
             unlink(public_path($category->image));
             $category->delete();
             return ResponseHelper::sendSuccess('Category deleted successfully', null, 200);
