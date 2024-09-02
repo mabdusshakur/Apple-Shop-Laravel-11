@@ -39,6 +39,11 @@ class CustomerProfileController extends Controller
             // merge the user id with the request data
             $data = $request->merge(['user_id' => $user_id])->all();
 
+            $isExits = CustomerProfile::where('user_id', $user_id)->first();
+            if ($isExits) {
+                return ResponseHelper::sendError('Customer profile already exists, use Patch|Put For update profile', null, 400);
+            }
+
             // create a new customer profile
             $customerProfile = CustomerProfile::create($data);
 
