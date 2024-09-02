@@ -21,8 +21,6 @@ class AuthController extends Controller
      */
     function userLogin(Request $request): JsonResponse
     {
-        return ResponseHelper::sendError('Not implemented', null, 501);
-
         try {
             // Validate the request
             $request->validate([
