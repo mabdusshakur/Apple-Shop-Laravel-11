@@ -24,7 +24,14 @@ class UpdateProductDetailRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'img1' => 'nullable|image|max:200',
+            'img2' => 'nullable|image|max:200',
+            'img3' => 'nullable|image|max:200',
+            'img4' => 'nullable|image|max:200',
+            'description' => 'required|string',
+            'color' => 'required|string|max:200',
+            'size' => 'required|string|max:200',
+            'product_id' => 'required|exists:products,id'
         ];
     }
 
