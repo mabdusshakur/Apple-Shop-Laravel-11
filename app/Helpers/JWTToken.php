@@ -1,6 +1,7 @@
 <?php
 namespace App\Helpers;
 
+use App\Models\User;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Illuminate\Support\Facades\Cache;
@@ -27,9 +28,21 @@ class JWTToken
             'iat' => time(),
             'exp' => time() + $expiryTime,
             'email' => $userEmail,
-            'id' => $userId
+            'id' => $userId,
+            'is_admin' => self::isAdmin($userId)
         ];
         return JWT::encode($payload, $key, 'HS256');
+    }
+
+    /**
+     * Checks if the user is an admin.
+     *
+     * @param string $user The email of the user.
+     * @return bool Returns true if the user is an admin, otherwise returns false.
+     */
+    private static function isAdmin($user)
+    {
+        return User::where('email', $user)->first()->is_admin;
     }
 
     /**
