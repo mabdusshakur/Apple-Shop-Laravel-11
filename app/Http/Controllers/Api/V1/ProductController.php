@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Helper\ResponseHelper;
+use App\Helpers\ResponseHelper;
 use App\Helpers\TokenAuth;
 use App\Models\Product;
 use Illuminate\Http\Request;

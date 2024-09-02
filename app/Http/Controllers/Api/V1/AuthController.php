@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Helper\ResponseHelper;
+use App\Helpers\ResponseHelper;
 use App\Helpers\JWTToken;
 use App\Helpers\TokenAuth;
 use App\Http\Controllers\Controller;
@@ -21,6 +21,8 @@ class AuthController extends Controller
      */
     function userLogin(Request $request): JsonResponse
     {
+        return ResponseHelper::sendError('Not implemented', null, 501);
+
         try {
             // Validate the request
             $request->validate([
