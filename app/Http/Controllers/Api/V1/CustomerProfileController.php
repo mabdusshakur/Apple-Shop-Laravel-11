@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Helper\ResponseHelper;
+use App\Helpers\TokenAuth;
 use App\Models\CustomerProfile;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCustomerProfileRequest;
@@ -30,7 +32,23 @@ class CustomerProfileController extends Controller
      */
     public function store(StoreCustomerProfileRequest $request)
     {
-        //
+        try {
+            // get the user id from the request
+            $user_id = TokenAuth::getUserId($request);
+
+            // merge the user id with the request data
+            $data = $request->merge(['user_id' => $user_id])->all();
+
+            // create a new customer profile
+            $customerProfile = CustomerProfile::create($data);
+
+            if (!$customerProfile) {
+                return ResponseHelper::sendError('Failed to create customer profile', null, 500);
+            }
+            return ResponseHelper::sendSuccess('Customer profile created successfully', $customerProfile, 201);
+        } catch (\Throwable $th) {
+            return ResponseHelper::sendError('Failed to create customer profile', $th->getMessage(), 500);
+        }
     }
 
     /**
@@ -38,7 +56,16 @@ class CustomerProfileController extends Controller
      */
     public function show(CustomerProfile $customerProfile)
     {
-        //
+        try {
+            $user_id = TokenAuth::getUserId(request());
+            $customerProfile = CustomerProfile::where('user_id', $user_id)->first();
+            if (!$customerProfile) {
+                return ResponseHelper::sendError('Forbidden', null, 403);
+            }
+            return ResponseHelper::sendSuccess('Customer profile retrieved successfully', $customerProfile, 200);
+        } catch (\Throwable $th) {
+            return ResponseHelper::sendError('Failed to retrieve customer profile', $th->getMessage(), 500);
+        }
     }
 
     /**
@@ -54,7 +81,20 @@ class CustomerProfileController extends Controller
      */
     public function update(UpdateCustomerProfileRequest $request, CustomerProfile $customerProfile)
     {
-        //
+        try {
+            $user_id = TokenAuth::getUserId(request());
+            $customerProfile = CustomerProfile::where('user_id', $user_id)->first();
+            if (!$customerProfile) {
+                return ResponseHelper::sendError('Forbidden', null, 403);
+            }
+
+            $data = $request->all();
+            $customerProfile->update($data);
+
+            return ResponseHelper::sendSuccess('Customer profile updated successfully', $customerProfile, 200);
+        } catch (\Throwable $th) {
+            return ResponseHelper::sendError('Failed to update customer profile', $th->getMessage(), 500);
+        }
     }
 
     /**
