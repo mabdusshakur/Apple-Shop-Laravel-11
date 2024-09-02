@@ -100,6 +100,7 @@ class BrandController extends Controller
                 $image_name = time() . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('uploads/images'), $image_name);
                 $data['image'] = 'uploads/images/' . $image_name;
+                unlink(public_path($brand->image));
             }
 
             $brand->update($data);
