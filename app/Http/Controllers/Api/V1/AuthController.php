@@ -62,13 +62,12 @@ class AuthController extends Controller
         try {
             // Validate the request
             $request->validate([
-                'otp' => 'required|integer'
+                'otp' => 'required|integer',
+                'email' => 'required|email'
             ]);
 
-            // Get the email address from the header coming from the token (JWT) using the TokenVerification middleware
-            $email = TokenAuth::getUserEmail($request);
-
-            // Get the OTP from the request
+            // Get the email address and OTP from the request
+            $email = $request->input('email');
             $otp = $request->input('otp');
 
             // Find the user record
