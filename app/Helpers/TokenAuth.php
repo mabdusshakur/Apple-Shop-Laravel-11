@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use App\Models\CustomerProfile;
+
 class TokenAuth
 {
     /**
@@ -29,5 +31,16 @@ class TokenAuth
     public static function isAdmin($request): bool
     {
         return $request->headers->get('is_admin');
+    }
+
+    /**
+     * Summary of getCustomerId
+     * return customer id by searching user id from CustomerProfile model
+     */
+    public static function getCustomerId($request): int
+    {
+        $user_id = self::getUserId($request);
+        $customer_id = CustomerProfile::where('user_id', $user_id)->first()->id;
+        return $customer_id;
     }
 }
