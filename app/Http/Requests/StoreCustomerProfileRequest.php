@@ -25,7 +25,21 @@ class StoreCustomerProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'cus_name' => 'required|string|max:100',
+            'cus_add' => 'required|string|max:500',
+            'cus_city' => 'required|string|max:50',
+            'cus_state' => 'required|string|max:50',
+            'cus_postcode' => 'required|string|max:50',
+            'cus_country' => 'required|string|max:50',
+            'cus_phone' => 'required|string|max:50',
+            'cus_fax' => 'required|string|max:50',
+            'ship_name' => 'required|string|max:100',
+            'ship_add' => 'required|string|max:100',
+            'ship_city' => 'required|string|max:100',
+            'ship_state' => 'required|string|max:100',
+            'ship_postcode' => 'required|string|max:100',
+            'ship_country' => 'required|string|max:100',
+            'ship_phone' => 'required|string|max:50',
         ];
     }
 
