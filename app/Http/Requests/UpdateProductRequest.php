@@ -24,7 +24,18 @@ class UpdateProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|string|max:200',
+            'short_des' => 'required|string|max:500',
+            'price' => 'required|numeric',
+            'is_discount' => 'required|boolean',
+            'discount_price' => 'required_if:is_discount,true|numeric',
+            'image' => 'required|string|max:200',
+            'in_stock' => 'required|boolean',
+            'stock' => 'required|integer',
+            'star' => 'required|numeric',
+            'remark' => 'required|in:popular,new,top,special,trending,regular',
+            'category_id' => 'required|integer',
+            'brand_id' => 'required|integer',
         ];
     }
 
