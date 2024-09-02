@@ -25,7 +25,12 @@ class UpdateProductSliderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|string|max:200',
+            'short_description' => 'required|string|max:500',
+            'price' => 'required|numeric|between:0,999999.99',
+            'image' => 'nullable|image',
+            'active' => 'required|in:yes,no',
+            'product_id' => 'required|exists:products,id'
         ];
     }
 
