@@ -29,7 +29,7 @@ class UpdateProductRequest extends FormRequest
             'price' => 'required|numeric',
             'is_discount' => 'required|boolean',
             'discount_price' => 'required_if:is_discount,true|numeric',
-            'image' => 'required|string|max:200',
+            'image' => 'nullable',
             'in_stock' => 'required|boolean',
             'stock' => 'required|integer',
             'star' => 'required|numeric',
