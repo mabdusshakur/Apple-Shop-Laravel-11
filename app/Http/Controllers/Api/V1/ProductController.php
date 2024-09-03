@@ -123,6 +123,9 @@ class ProductController extends Controller
                 $image_name = time() . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('uploads/images'), $image_name);
                 $data['image'] = 'uploads/images/' . $image_name;
+                if ($product->image && file_exists(public_path($product->image))) {
+                    unlink(public_path($product->image));
+                }
             } else {
                 $data['image'] = $product->image;
             }
@@ -149,7 +152,9 @@ class ProductController extends Controller
             if (!$is_admin) {
                 return ResponseHelper::sendError('You are not authorized to perform this action', null, 403);
             }
-            unlink(public_path($product->image));
+            if ($product->image && file_exists(public_path($product->image))) {
+                unlink(public_path($product->image));
+            }
             $product->delete();
             return ResponseHelper::sendSuccess('Product deleted successfully', null, 200);
         } catch (\Throwable $th) {
