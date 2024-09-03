@@ -4,12 +4,13 @@ namespace App\Helpers;
 
 use App\Models\Invoice;
 use App\Models\SslcommerzCredential;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Http;
 
 class SSLCommerz
 {
 
-    static function InitiatePayment($profile, $products, $payable, $tran_id, $user_email): array
+    static function InitiatePayment($profile, $products, $payable, $tran_id, $user_email): JsonResponse | array
     {
         try {
             $ssl = SslcommerzCredential::first();
@@ -41,9 +42,9 @@ class SSLCommerz
                 "ship_state" => $profile->ship_state,
                 "ship_country" => $profile->ship_country,
                 "ship_postcode" => $profile->ship_postcode,
-                "product_name" => $products->name,
-                "product_category" => $products->category,
-                "product_profile" => $products->brand,
+                "product_name" => $products['name'],
+                "product_category" => $products['category'],
+                "product_profile" => $products['brand'],
                 "product_amount" => $payable,
             ]);
             return $response->json('desc');
