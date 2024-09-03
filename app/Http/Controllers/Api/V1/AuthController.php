@@ -93,4 +93,19 @@ class AuthController extends Controller
             return ResponseHelper::sendError("Failed to verify OTP", $th->getMessage(), 500);
         }
     }
+
+    function userLogout(Request $request)
+    {
+        try {
+            // Invalidate the token 
+            $token = $request->cookie('token');
+            if ($token) {
+                JWTToken::invalidateToken($token);
+            }
+            // Clear the token from cookie
+            return ResponseHelper::sendSuccess('Logout Success', 'Logout Success')->cookie('token', '', -1);
+        } catch (\Throwable $th) {
+            return ResponseHelper::sendError('User logout failed', 200, $th->getMessage());
+        }
+    }
 }
