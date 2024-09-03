@@ -36,6 +36,14 @@ class ProductDetailController extends Controller
             return 'uploads/images/' . $img_name;
         }
     }
+    private function unlinkOldImg($oldRes, $image)
+    {
+        if ($oldRes->image && file_exists(public_path($oldRes->image))) {
+            unlink(public_path($oldRes->image));
+        }
+    }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -59,12 +67,12 @@ class ProductDetailController extends Controller
             $productDetail = ProductDetail::create($data);
 
             if (!$productDetail) {
-                ResponseHelper::sendError('Failed to create product detail', null, 500);
+                return ResponseHelper::sendError('Failed to create product detail', null, 500);
             }
 
-            ResponseHelper::sendSuccess('Product detail created successfully', $productDetail, 201);
+            return ResponseHelper::sendSuccess('Product detail created successfully', $productDetail, 201);
         } catch (\Throwable $th) {
-            ResponseHelper::sendError('Failed to create product detail', $th->getMessage(), 500);
+            return ResponseHelper::sendError('Failed to create product detail', $th->getMessage(), 500);
         }
     }
 
@@ -104,24 +112,28 @@ class ProductDetailController extends Controller
 
             if ($request->hasFile('img1')) {
                 $data['img1'] = $this->uploadImage($request, 'img1');
+                $this->unlinkOldImg($productDetail, 'img1');
             } else {
                 $data['img1'] = $productDetail->img1;
             }
 
             if ($request->hasFile('img2')) {
                 $data['img2'] = $this->uploadImage($request, 'img2');
+                $this->unlinkOldImg($productDetail, 'img2');
             } else {
                 $data['img2'] = $productDetail->img2;
             }
 
             if ($request->hasFile('img3')) {
                 $data['img3'] = $this->uploadImage($request, 'img3');
+                $this->unlinkOldImg($productDetail, 'img3');
             } else {
                 $data['img3'] = $productDetail->img3;
             }
 
             if ($request->hasFile('img4')) {
                 $data['img4'] = $this->uploadImage($request, 'img4');
+                $this->unlinkOldImg($productDetail, 'img4');
             } else {
                 $data['img4'] = $productDetail->img4;
             }
@@ -146,10 +158,10 @@ class ProductDetailController extends Controller
                 return ResponseHelper::sendError('You are not authorized to perform this action', null, 403);
             }
 
-            unlink(public_path($productDetail->img1));
-            unlink(public_path($productDetail->img2));
-            unlink(public_path($productDetail->img3));
-            unlink(public_path($productDetail->img4));
+            $this->unlinkOldImg($productDetail, 'img1');
+            $this->unlinkOldImg($productDetail, 'img2');
+            $this->unlinkOldImg($productDetail, 'img3');
+            $this->unlinkOldImg($productDetail, 'img4');
             $productDetail->delete();
 
             return ResponseHelper::sendSuccess('Product detail deleted successfully', null, 200);
