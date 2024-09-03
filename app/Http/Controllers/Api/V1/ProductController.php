@@ -37,7 +37,7 @@ class ProductController extends Controller
             $products = Product::all();
         }
 
-        ResponseHelper::sendSuccess('Products retrieved successfully', $products, 200);
+        return ResponseHelper::sendSuccess('Products retrieved successfully', $products, 200);
     }
 
     /**
