@@ -103,6 +103,8 @@ class CategoryController extends Controller
                 if ($category->image && file_exists(public_path($category->image))) {
                     unlink(public_path($category->image));
                 }
+            } else {
+                $data['image'] = $category->image;
             }
 
             $category->update($data);

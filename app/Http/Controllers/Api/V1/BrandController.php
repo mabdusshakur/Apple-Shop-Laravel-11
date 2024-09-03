@@ -103,6 +103,8 @@ class BrandController extends Controller
                 if ($brand->image && file_exists(public_path($brand->image))) {
                     unlink(public_path($brand->image));
                 }
+            } else {
+                $data['image'] = $brand->image;
             }
 
             $brand->update($data);

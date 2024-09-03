@@ -89,8 +89,13 @@ class ProductSliderController extends Controller
                 $img_name = time() . '.' . $img->getClientOriginalExtension();
                 $img->move(public_path('uploads/images'), $img_name);
                 $data['image'] = 'uploads/images/' . $img_name;
+
+                if ($productSlider->image && file_exists(public_path($productSlider->image))) {
+                    unlink(public_path($productSlider->image));
+                }
+            } else {
+                $data['image'] = $productSlider->image;
             }
-            $data['image'] = $productSlider->image;
 
             $productSlider->update($data);
             return ResponseHelper::sendSuccess('Product slider updated successfully', $productSlider, 200);
@@ -111,7 +116,9 @@ class ProductSliderController extends Controller
                 return ResponseHelper::sendError('You are not authorized to perform this action', null, 403);
             }
 
-            unlink(public_path($productSlider->image));
+            if ($productSlider->image && file_exists(public_path($productSlider->image))) {
+                unlink(public_path($productSlider->image));
+            }
             $productSlider->delete();
             return ResponseHelper::sendSuccess('Product slider deleted successfully', null, 200);
         } catch (\Throwable $th) {
