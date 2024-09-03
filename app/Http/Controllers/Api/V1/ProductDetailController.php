@@ -31,15 +31,15 @@ class ProductDetailController extends Controller
     {
         if ($request->hasFile($image)) {
             $img = $request->file($image);
-            $img_name = time() . '.' . $img->getClientOriginalExtension();
+            $img_name = time() . '-' . rand(1000, 9999) . '.' . $img->getClientOriginalExtension();
             $img->move(public_path('uploads/images'), $img_name);
             return 'uploads/images/' . $img_name;
         }
     }
-    private function unlinkOldImg($oldRes, $image)
+    private function unlinkOldImg($oldRes, $img)
     {
-        if ($oldRes->image && file_exists(public_path($oldRes->image))) {
-            unlink(public_path($oldRes->image));
+        if ($oldRes->$img && file_exists(public_path($oldRes->$img))) {
+            unlink(public_path($oldRes->$img));
         }
     }
 
@@ -82,7 +82,8 @@ class ProductDetailController extends Controller
     public function show(ProductDetail $productDetail)
     {
         try {
-            return ResponseHelper::sendSuccess('Product detail retrieved successfully', $productDetail->with('product', 'product.brand', 'product.category'), 200);
+            $productDetail = ProductDetail::with('product', 'product.brand', 'product.category')->find($productDetail->id);
+            return ResponseHelper::sendSuccess('Product detail retrieved successfully', $productDetail, 200);
         } catch (\Throwable $th) {
             return ResponseHelper::sendError('Failed to get product detail', $th->getMessage(), 500);
         }
