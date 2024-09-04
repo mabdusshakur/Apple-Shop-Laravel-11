@@ -87,7 +87,7 @@
         $item_price = item['product']['price'];
         $discount_price = item['product']['discount_price'];
         $is_discount = item['product']['is_discount'];
-        return $is_discount ? $discount_price : $item_price;
+        return ($is_discount ? $discount_price : $item_price) * item['quantity'];
     }
 
     async function CartTotal(data) {
