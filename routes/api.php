@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\V1\ProductDetailController;
 use App\Http\Controllers\Api\V1\ProductSliderController;
 use App\Http\Controllers\Api\V1\CustomerProfileController;
 use App\Http\Controllers\Api\V1\InvoiceController;
+use App\Http\Controllers\Api\V1\ProductReviewController;
 use App\Http\Controllers\Api\V1\SSLCommerzController;
 use App\Http\Controllers\Api\V1\WishlistController;
 
@@ -28,6 +29,7 @@ Route::apiResource('categories', CategoryController::class)->only(['index']);
 Route::apiResource('products', ProductController::class)->only(['index', 'show']);
 Route::apiResource('product-details', ProductDetailController::class)->only(['index', 'show']);
 Route::apiResource('product-sliders', ProductSliderController::class)->only(['index']);
+Route::apiResource('product-reviews', ProductReviewController::class)->only(['index']);
 
 
 Route::group(['middleware' => TokenAuthMiddleware::class], function () {
@@ -45,6 +47,7 @@ Route::group(['middleware' => TokenAuthMiddleware::class], function () {
     // Customer Routes
     Route::apiResource('carts', CartController::class)->only(['index', 'store', 'destroy']);
     Route::apiResource('wishlists', WishlistController::class)->only(['index', 'store', 'destroy']);
+    Route::apiResource('reviews', ProductReviewController::class)->only(['index', 'store', 'update', 'destroy']);
 
     // Checkout Routes
     Route::apiResource('invoices', InvoiceController::class)->only(['index', 'store', 'show']);
