@@ -28,13 +28,13 @@ class ProductController extends Controller
         $brand_id = $request->input('brand_id');
 
         if ($category_id) {
-            $products = Product::where('category_id', $category_id)->with('brand', 'category')->get();
+            $products = Product::where('category_id', $category_id)->with('brand', 'category', 'productDetail:id,product_id')->get();
         } elseif ($remark) {
-            $products = Product::where('remark', 'like', "%$remark%")->with('brand', 'category')->get();
+            $products = Product::where('remark', 'like', "%$remark%")->with('brand', 'category', 'productDetail:id,product_id')->get();
         } elseif ($brand_id) {
-            $products = Product::where('brand_id', $brand_id)->with('brand', 'category')->get();
+            $products = Product::where('brand_id', $brand_id)->with('brand', 'category', 'productDetail:id,product_id')->get();
         } else {
-            $products = Product::all();
+            $products = Product::all()->load('brand', 'category', 'productDetail:id,product_id');
         }
 
         return ResponseHelper::sendSuccess('Products retrieved successfully', $products, 200);
