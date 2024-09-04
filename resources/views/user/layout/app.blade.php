@@ -36,6 +36,11 @@
     <script src="{{ asset('user/assets/js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('user/assets/js/axios.min.js') }}"></script>
 
+    {{-- For The Client Side Auth --}}
+    <script src=" https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js "></script>
+
+    <script src="{{ asset('user/assets/js/auth.js') }}"></script>
+
 </head>
 
 <body>
@@ -51,10 +56,12 @@
     <div>
         @yield('content')
     </div>
+
     <script src="{{ asset('user/assets/js/scripts.js') }}"></script>
     <script src="{{ asset('user/assets/js/magnific-popup.min.js') }}"></script>
     <script src="{{ asset('user/assets/js/popper.min.js') }}"></script>
     <script src="{{ asset('user/assets/bootstrap/js/bootstrap.min.js') }}"></script>
+
 </body>
 
 </html>
