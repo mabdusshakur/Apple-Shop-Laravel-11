@@ -137,7 +137,14 @@
 
 
     async function productReview() {
-        let res = await axios.get("/api/reviews/?product_id=" + product_id);
+
+        let res = await axios.get("/api/reviews/?product_id=" + product_id).catch((e) => {
+            if (e.response.status === 401) {
+                $(".preloader").delay(90).fadeOut(100).addClass('loaded');
+                $("#reviewList").append("<li class='list-group-item'>Please Login to see the review</li>");
+            }
+        });
+
         let Details = await res.data[0];
 
         $("#reviewList").empty();
