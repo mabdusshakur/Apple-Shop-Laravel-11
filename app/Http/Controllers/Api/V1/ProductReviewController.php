@@ -23,7 +23,7 @@ class ProductReviewController extends Controller
 
         $product_id = $request->input('product_id');
 
-        $productReviews = ProductReview::where('product_id', $product_id)->get();
+        $productReviews = ProductReview::where('product_id', $product_id)->with('customerProfile:id,cus_name')->get();
 
         return ResponseHelper::sendSuccess('Product reviews retrieved successfully', $productReviews, 200);
     }
