@@ -13,7 +13,7 @@
     <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet" />
     <link href="{{ asset('admin/css/toastify.min.css') }}" rel="stylesheet" />
 
-    <link href="{{ asset('admin/https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css') }}" rel="stylesheet" />
+    <link href="{{ asset('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css') }}" rel="stylesheet" />
 
     <link href="{{ asset('admin/css/jquery.dataTables.min.css') }}" rel="stylesheet" />
     <script src="{{ asset('admin/js/jquery-3.7.0.min.js') }}"></script>
@@ -75,6 +75,11 @@
         <a class="side-bar-item" href="{{ route('web.admin.dashboard') }}">
             <i class="bi bi-graph-up"></i>
             <span class="side-bar-item-caption">Dashboard</span>
+        </a>
+
+        <a class="side-bar-item" href="{{ route('web.admin.brand') }}">
+            <i class="bi bi-list-nested"></i>
+            <span class="side-bar-item-caption">Brand</span>
         </a>
 
         <a class="side-bar-item" href="{{ route('web.admin.category') }}">
