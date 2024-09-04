@@ -55,8 +55,14 @@ Route::group(['middleware' => TokenAuthMiddleware::class], function () {
     // Admin Routes
     Route::group(['prefix' => 'admin', 'middleware' => TokenAdminAuthMiddleware::class], function () {
         Route::apiResource('brands', BrandController::class);
+        Route::post('brands/{brand}', [BrandController::class, 'update']); // Update product with post, if PATCH OR PUT method not working
+
         Route::apiResource('categories', CategoryController::class);
+        Route::post('categories/{category}', [CategoryController::class, 'update']); // Update product with post, if PATCH OR PUT method not working
+
         Route::apiResource('products', ProductController::class);
+        Route::post('products/{product}', [ProductController::class, 'update']); // Update product with post, if PATCH OR PUT method not working
+
         Route::apiResource('product-details', ProductDetailController::class);
         Route::apiResource('product-sliders', ProductSliderController::class);
 
