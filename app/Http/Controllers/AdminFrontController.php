@@ -20,4 +20,9 @@ class AdminFrontController extends Controller
     {
         return view('admin.dashboard.category-page');
     }
+
+    function brandPage()
+    {
+        return view('admin.dashboard.brand-page');
+    }
 }
