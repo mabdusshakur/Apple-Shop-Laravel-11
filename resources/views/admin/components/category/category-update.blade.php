@@ -26,7 +26,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn bg-gradient-primary" id="modal-close" data-bs-dismiss="modal" aria-label="Close">Close</button>
-                <button class="btn bg-gradient-success" id="save-btn" onclick="Save()">Save</button>
+                <button class="btn bg-gradient-success" id="save-btn" onclick="update()">Save</button>
             </div>
         </div>
     </div>
@@ -43,7 +43,7 @@
         document.getElementById('oldImg').src = ' {{ config('app.url') }}/' + res['image'];
     }
 
-    async function Save() {
+    async function update() {
         let categoryName = document.getElementById('categoryNameUpdate').value;
         let categoryImg = document.getElementById('categoryImgUpdate').files[0];
         let id = document.getElementById('updateID').value;

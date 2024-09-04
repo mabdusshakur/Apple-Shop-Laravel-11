@@ -36,7 +36,6 @@
     async function Save() {
         let categoryName = document.getElementById('categoryName').value;
         let categoryImg = document.getElementById('categoryImg').files[0];
-        return console.log(categoryImg);
 
         if (categoryName.length === 0) {
             errorToast("Category Required !")
@@ -59,6 +58,7 @@
 
             if (res.status === 201) {
                 successToast(res.data['message']);
+                $("#create-modal").modal('hide');
                 document.getElementById("save-form").reset();
                 await getList();
             } else {
