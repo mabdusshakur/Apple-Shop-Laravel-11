@@ -70,7 +70,11 @@ class BrandController extends Controller
      */
     public function show(Brand $brand)
     {
-        //
+        try {
+            return ResponseHelper::sendSuccess('Brand retrieved successfully', $brand, 200);
+        } catch (\Throwable $th) {
+            return ResponseHelper::sendError('Failed to retrieve brand', $th->getMessage(), 500);
+        }
     }
 
     /**

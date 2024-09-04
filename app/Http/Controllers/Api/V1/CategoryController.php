@@ -70,7 +70,11 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        try {
+            return ResponseHelper::sendSuccess('Category retrieved successfully', $category, 200);
+        } catch (\Throwable $th) {
+            return ResponseHelper::sendError('Failed to retrieve category', $th->getMessage(), 500);
+        }
     }
 
     /**
