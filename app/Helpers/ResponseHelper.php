@@ -18,8 +18,8 @@ class ResponseHelper
         $response = [
             'success' => true,
             'message' => $message,
-            'data' => $result,
-            // $result,
+            // 'data' => $result,
+            $result,
         ];
         return response()->json($response, $statusCode);
     }
