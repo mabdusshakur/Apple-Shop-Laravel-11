@@ -19,12 +19,3 @@ function setLoggedOut() {
 function isLoggedIn() {
     return Cookies.get('loggedIn') === 'true';
 }
-
-/**
- * Checks if the user is logged in and redirects to the login page if not.
- */
-function auth() {
-    if (!isLoggedIn()) {
-        window.location.href = "/login-page";
-    }
-}
