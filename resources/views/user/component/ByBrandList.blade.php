@@ -31,6 +31,10 @@
         let res = await axios.get(`/api/products/?brand_id=${id}`);
         res = res.data[0];
 
+        if (res.length === 0) {
+            return $("#byBrandList").append(`<div class="col-12 text-center"><h3>No Product Found</h3></div>`);
+        }
+
         $("#byBrandList").empty();
 
         res.forEach((item, i) => {
