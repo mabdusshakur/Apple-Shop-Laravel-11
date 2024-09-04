@@ -14,7 +14,7 @@ use App\Http\Controllers\Api\V1\InvoiceController;
 use App\Http\Controllers\Api\V1\ProductReviewController;
 use App\Http\Controllers\Api\V1\SSLCommerzController;
 use App\Http\Controllers\Api\V1\WishlistController;
-
+use App\Http\Middleware\TokenAdminAuthMiddleware;
 
 // Auth Routes
 Route::group(['prefix' => 'auth'], function () {
@@ -53,7 +53,7 @@ Route::group(['middleware' => TokenAuthMiddleware::class], function () {
     Route::apiResource('invoices', InvoiceController::class)->only(['index', 'store', 'show']);
 
     // Admin Routes
-    Route::group(['prefix' => 'admin'], function () {
+    Route::group(['prefix' => 'admin', 'middleware' => TokenAdminAuthMiddleware::class], function () {
         Route::apiResource('brands', BrandController::class);
         Route::apiResource('categories', CategoryController::class);
         Route::apiResource('products', ProductController::class);
