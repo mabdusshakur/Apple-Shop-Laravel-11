@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminFrontController;
 use App\Http\Controllers\Api\V1\SSLCommerzController;
 use App\Http\Controllers\UserFrontController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,14 @@ Route::get('/product-details/{id?}', [UserFrontController::class, 'productDetail
 Route::get('/policy', [UserFrontController::class, 'policyPage'])->name('web.policy');
 Route::get('/product-by-brand/{id?}', [UserFrontController::class, 'productByBrandPage'])->name('web.product-by-brand');
 Route::get('/product-by-category/{id?}', [UserFrontController::class, 'productByCategoryPage'])->name('web.product-by-category');
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/dashboard', [AdminFrontController::class, 'dashboardPage'])->name('web.admin.dashboard');
+    Route::get('/product', [AdminFrontController::class, 'productPage'])->name('web.admin.product');
+    Route::get('/category', [AdminFrontController::class, 'categoryPage'])->name('web.admin.category');
+    Route::get('/brand', [AdminFrontController::class, 'brandPage'])->name('web.admin.brand');
+});
 
 
 Route::post('/ssl-payment-success', [SSLCommerzController::class, 'paymentSuccess']);
