@@ -119,16 +119,14 @@
 
         $("#paymentList").empty();
 
-        let res = await axios.get("/InvoiceCreate");
+        let res = await axios.post("/api/invoices");
 
         $(".preloader").delay(90).fadeOut(100).addClass('loaded');
 
-
-        if (res.status === 200) {
-
+        if (res.status === 201) {
             $("#paymentMethodModal").modal('show');
 
-            res.data['data'][0]['paymentMethod'].forEach((item, i) => {
+            res.data[0]['payment_methods'].forEach((item, i) => {
                 let EachItem = `<tr>
                                 <td><img class="w-50" src=${item['logo']} alt="product"></td>
                                 <td><p>${item['name']}</p></td>
@@ -136,10 +134,8 @@
                             </tr>`
                 $("#paymentList").append(EachItem);
             })
-
         } else {
             alert("Request Fail");
         }
-
     }
 </script>
