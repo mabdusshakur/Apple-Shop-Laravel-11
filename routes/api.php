@@ -22,10 +22,15 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 
+// Public Routes
+Route::apiResource('brands', BrandController::class)->only(['index']);
+Route::apiResource('categories', CategoryController::class)->only(['index']);
+Route::apiResource('products', ProductController::class)->only(['index', 'show']);
+Route::apiResource('product-details', ProductDetailController::class)->only(['index', 'show']);
+Route::apiResource('product-sliders', ProductSliderController::class)->only(['index']);
 
 
 Route::group(['middleware' => TokenAuthMiddleware::class], function () {
-
 
     // Auth Routes
     Route::group(['prefix' => 'auth'], function () {
@@ -37,15 +42,9 @@ Route::group(['middleware' => TokenAuthMiddleware::class], function () {
         Route::apiResource('profiles', CustomerProfileController::class)->only(['store', 'show', 'update']);
     });
 
-
     // Customer Routes
     Route::apiResource('carts', CartController::class)->only(['index', 'store', 'destroy']);
     Route::apiResource('wishlists', WishlistController::class)->only(['index', 'store', 'destroy']);
-    Route::apiResource('brands', BrandController::class)->only(['index']);
-    Route::apiResource('categories', CategoryController::class)->only(['index']);
-    Route::apiResource('products', ProductController::class)->only(['index', 'show']);
-    Route::apiResource('product-details', ProductDetailController::class)->only(['index', 'show']);
-    Route::apiResource('product-sliders', ProductSliderController::class)->only(['index']);
 
     // Checkout Routes
     Route::apiResource('invoices', InvoiceController::class)->only(['index', 'store', 'show']);
