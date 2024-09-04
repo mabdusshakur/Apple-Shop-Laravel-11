@@ -36,6 +36,7 @@
                 otp: code
             }).then(res => {
                 if (res.data.success === true) {
+                    setLoggedIn();
                     if (sessionStorage.getItem("last_location")) {
                         window.location.href = sessionStorage.getItem("last_location")
                     } else {
@@ -49,21 +50,6 @@
                 $(".preloader").delay(90).fadeOut(100).addClass('loaded');
                 alert(e.response.data.message);
             })
-
-            return;
-            console.log(res);
-
-            if (res.status === 200) {
-                if (sessionStorage.getItem("last_location")) {
-                    window.location.href = sessionStorage.getItem("last_location")
-                } else {
-                    window.location.href = "{{ route('web.home') }}"
-                }
-            } else if (res.data.success === false) {
-                $(".preloader").delay(90).fadeOut(100).addClass('loaded');
-                alert(res.data.message);
-            }
         }
-
     }
 </script>
