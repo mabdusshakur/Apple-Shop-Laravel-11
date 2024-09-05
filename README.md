@@ -10,7 +10,7 @@
 8. Run `php artisan migrate`
 9. Run `php artisan serve` to start the test server
 
-## PostMan API Documentation added in the root directory of the project as a file named `Ecommerce.postman_collection.json`
+#### PostMan API Documentation added in the root directory of the project as a file named `Ecommerce.postman_collection.json`
 
 ** URLs **
 Root URL: `http://127.0.0.1:8000`
