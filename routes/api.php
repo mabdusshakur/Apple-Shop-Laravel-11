@@ -64,6 +64,8 @@ Route::group(['middleware' => TokenAuthMiddleware::class], function () {
         Route::post('products/{product}', [ProductController::class, 'update']); // Update product with post, if PATCH OR PUT method not working
 
         Route::apiResource('product-details', ProductDetailController::class);
+        Route::post('product-details/{product_detail}', [ProductDetailController::class, 'update']); // Update product with post, if PATCH OR PUT method not working
+
         Route::apiResource('product-sliders', ProductSliderController::class);
 
         // SSLCommerz Payment Gateway info store route
